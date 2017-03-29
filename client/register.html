@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div>
+                Name:
+                <input id="name" name="name" type="text" />
+            </div>
+            <div>
+                Email:
+                <input id="email" name="email" type="email" />
+            </div>
+            <div>
+                Password:
+                <input id="password" name="password" type="password" />
+            </div>
+            <div>
+                Password Confirmation:
+                <input id="password_confirmation" name="password_confirmation" type="password" />
+            </div>
+
+            <button id="login">Зареєструватися</button>
+
+            <div id="message"></div>
+            <!-- message - повідомлення-->
+        </form>
+    </div><!-- /.container -->
+
+    <script>
+        $('#login').click(function (event) {
+            event.preventDefault(); // відключили відправку форми
+
+            var name = $('#name').val();
+            var email = $('#email').val(); // value - значення
+            var password = $('#password').val();
+            var password_confirmation = $('#password_confirmation').val();
+
+            var request = $.post("https://packa.xedelweiss.net/api/auth/register", {
+                email: email,
+                name: name,
+                password: password,
+                password_confirmation: password_confirmation
+            });
+
+            request.done(function (response) {
+                console.log('успіх');
+                console.log(response);
+
+                window.location.href = 'login.html';
+            });
+
+            request.fail(function (data) {
+                console.log('помилка');
+                console.log(data.responseJSON);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -30,9 +30,6 @@
             </div>
 
             <button id="login">Увійти</button>
-
-            <div id="message"></div>
-            <!-- message - повідомлення-->
         </form>
     </div><!-- /.container -->
 
@@ -43,12 +40,11 @@
             var email = $('#email').val(); // value - значення
             var password = $('#password').val();
 
-            $.post("http://localhost/server/login.php", {
+            $.post("https://packa.xedelweiss.net/api/auth/login", {
                 "email": email,
                 "password": password
             }, function (response) {
-                // response - відповідь
-                $('#message').text(response);
+                window.location.href = "user.html"
             });
         });
     </script>
